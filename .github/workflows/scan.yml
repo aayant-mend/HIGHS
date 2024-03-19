@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu:latest
   
     steps:
+    - uses: actions/checkout@v3
     - name: Download Scanners
         echo "Downlaoding the UA"
         curl -LJ "https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar" -o "UA.jar"
