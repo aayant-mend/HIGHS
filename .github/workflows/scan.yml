@@ -1,0 +1,47 @@
+name: CI
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs: 
+  build:
+    runs-on: ubuntu:latest
+  
+    steps:
+    - name: Download Scanners
+        echo "Downlaoding the UA"
+        curl -LJ "https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar" -o "UA.jar"
+        echo "Downlaoding the CLI"
+        curl "https://downloads.mend.io/cli/linux_amd64/mend" -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+    - name: Print UA Version
+      run: |
+        echo "Verifying the UA"
+        java -jar "UA.jar" -v
+        echo "Verifying the CLI version"
+        mend version
+    - name: Resolve dependencies
+      run: pip install .
+    - name: Run UA Scan
+      run: java -jar UA.jar
+      env:
+        WS_PYTHON_RUNPOETRYPRESTEP: true
+        WS_PROJECTNAME: ${{GITHUB_REPOSITORY}}
+        WS_PRODUCTNAME: UAScans
+        WS_USERKEY: $WS_USERKEY
+        WS_APIKEY: $WS_APIKEY
+        WS_LOG_LEVEL: "DEBUG"
+        WS_SHOWPROGRESSBAR: false
+        
+    - name: Run Mend CLI
+      run: mend dep --update --scope "Aayans Sandbox//UAScans//${{GITHUB_REPOSITORY}}_CLI" --non-interactive
+      env:
+        MEND_USER_KEY: $WS_USERKEY
+        MEND_EMAIL: $MEND_EMAIL
+        MEND_URL: $MEND_URL
+        MEND_LOG_LEVEL: "DEBUG"
