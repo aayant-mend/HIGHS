@@ -34,7 +34,7 @@ jobs:
         java -jar UA.jar
       env:
         WS_PYTHON_RUNPOETRYPRESTEP: true
-        WS_PROJECTNAME: GH_HiGHS
+        WS_PROJECTNAME: $GITHUB_REPOSITORY
         WS_PRODUCTNAME: UAScans
         WS_USERKEY: ${{ secrets.WS_USERKEY }}
         WS_APIKEY: ${{ secrets.WS_APIKEY }}
