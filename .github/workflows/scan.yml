@@ -36,8 +36,8 @@ jobs:
         WS_PYTHON_RUNPOETRYPRESTEP: true
         WS_PROJECTNAME: ${{ env:GITHUB_REPOSITORY }}
         WS_PRODUCTNAME: UAScans
-        WS_USERKEY: $WS_USERKEY
-        WS_APIKEY: $WS_APIKEY
+        WS_USERKEY: ${{ secrets.WS_USERKEY }}
+        WS_APIKEY: ${{ secrets.WS_APIKEY }}
         WS_LOG_LEVEL: "DEBUG"
         WS_SHOWPROGRESSBAR: false
         
@@ -45,7 +45,7 @@ jobs:
       run: |
         mend dep --update --scope "Aayans Sandbox//UAScans//${{ env:GITHUB_REPOSITORY }}" --non-interactive
       env:
-        MEND_USER_KEY: $WS_USERKEY
-        MEND_EMAIL: $MEND_EMAIL
-        MEND_URL: $MEND_URL
+        MEND_USER_KEY: ${{ secrets.WS_USERKEY }}
+        MEND_EMAIL: ${{ secrets.MEND_EMAIL }}
+        MEND_URL: ${{ secrets.MEND_URL }}
         MEND_LOG_LEVEL: "DEBUG"
