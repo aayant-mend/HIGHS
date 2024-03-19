@@ -27,9 +27,11 @@ jobs:
         echo "Verifying the CLI version"
         mend version
     - name: Resolve dependencies
-      run: pip install .
+      run: |
+        pip install .
     - name: Run UA Scan
-      run: java -jar UA.jar
+      run: |
+        java -jar UA.jar
       env:
         WS_PYTHON_RUNPOETRYPRESTEP: true
         WS_PROJECTNAME: ${{GITHUB_REPOSITORY}}
@@ -40,7 +42,8 @@ jobs:
         WS_SHOWPROGRESSBAR: false
         
     - name: Run Mend CLI
-      run: mend dep --update --scope "Aayans Sandbox//UAScans//${{GITHUB_REPOSITORY}}_CLI" --non-interactive
+      run: |
+        mend dep --update --scope "Aayans Sandbox//UAScans//${{GITHUB_REPOSITORY}}_CLI" --non-interactive
       env:
         MEND_USER_KEY: $WS_USERKEY
         MEND_EMAIL: $MEND_EMAIL
