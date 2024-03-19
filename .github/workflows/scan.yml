@@ -34,7 +34,7 @@ jobs:
         java -jar UA.jar
       env:
         WS_PYTHON_RUNPOETRYPRESTEP: true
-        WS_PROJECTNAME: ${{env:GITHUB_REPOSITORY}}
+        WS_PROJECTNAME: ${{ env:GITHUB_REPOSITORY }}
         WS_PRODUCTNAME: UAScans
         WS_USERKEY: $WS_USERKEY
         WS_APIKEY: $WS_APIKEY
@@ -43,7 +43,7 @@ jobs:
         
     - name: Run Mend CLI
       run: |
-        mend dep --update --scope "Aayans Sandbox//UAScans//${{env:GITHUB_REPOSITORY}}" --non-interactive
+        mend dep --update --scope "Aayans Sandbox//UAScans//${{ env:GITHUB_REPOSITORY }}" --non-interactive
       env:
         MEND_USER_KEY: $WS_USERKEY
         MEND_EMAIL: $MEND_EMAIL
