@@ -13,15 +13,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Print working directory
-      run: |
-        pwd
-        ls -R
-        echo "cd'ing up"
-        cd ..
-        pwd
-        ls -R
+    - uses: actions/checkout@v4
     - name: Download Scanners
       run: |
         echo "Downloading the UA"
@@ -35,8 +27,7 @@ jobs:
         echo "Verifying the CLI version"
         mend version
     - name: Resolve dependencies
-      run: |
-        pip install .
+      run: pip install highspy
     - name: Run UA Scan
       run: |
         java -jar UA.jar
