@@ -27,7 +27,9 @@ jobs:
         echo "Verifying the CLI version"
         mend version
     - name: Resolve dependencies
-      run: pip install highspy
+      run: |
+        pip install virtualenv --user
+        pip install highspy
     - name: Run UA Scan
       run: |
         java -jar UA.jar
