@@ -32,7 +32,9 @@ jobs:
       run: |
         java -jar UA.jar
       env:
-        WS_PYTHON_RUNPOETRYPRESTEP: true
+        WS_PYTHON_RESOLVEDEPENDENCIES: true
+        WS_PYTHON_IGNORESOURCEFILES: false
+        WS_PYTHON_RESOLVESETUPFILES: true
         WS_PROJECTNAME: $GITHUB_REPOSITORY
         WS_PRODUCTNAME: UAScans
         WS_USERKEY: ${{ secrets.WS_USERKEY }}
