@@ -15,7 +15,9 @@ jobs:
   
     steps:
     - name: Print working directory
-      run: pwd
+      run: |
+        pwd
+        ls
     - name: Download Scanners
       run: |
         echo "Downloading the UA"
