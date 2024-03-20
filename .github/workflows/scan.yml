@@ -11,7 +11,7 @@ on:
 
 jobs: 
   scan:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
   
     steps:
     - name: Download Scanners
